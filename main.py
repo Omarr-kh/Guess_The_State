@@ -14,12 +14,13 @@ us_states = data["state"].to_list()
 
 
 while len(guessed_states) < 50:
-    user_input = screen.textinput("Guess a state", "Enter a State: ").title()
+    user_input = screen.textinput(
+        f"{len(guessed_states)}/50 States Guessed", "Enter a State: ").title()
 
     if user_input == "Exit":
         break
 
-    if user_input in us_states:
+    if user_input in us_states and user_input not in guessed_states:
         guessed_states.append(user_input)
         tr = turtle.Turtle()
         tr.hideturtle()
@@ -27,5 +28,3 @@ while len(guessed_states) < 50:
         state_info = data[data["state"] == user_input]
         tr.goto(int(state_info.x), int(state_info.y))
         tr.write(user_input)
-
-turtle.mainloop()
